@@ -1,7 +1,7 @@
-#include "hello.h"
+#include "../inc/hello.h"
 #include <stdio.h>
 
 void greet()
 {
-    printf("hello world!!!\n");
+    printf("天天向上\n");
 }

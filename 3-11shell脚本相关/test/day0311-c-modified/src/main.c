@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "hello.h"
+#include "../inc/hello.h"
 
 int main(int argc, char const *argv[])
 {
