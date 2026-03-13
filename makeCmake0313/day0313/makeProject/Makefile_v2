@@ -1,0 +1,14 @@
+# 在Makefile中，可以把下面的命令中的东西通过变量进行定义，如果这些发生改变，那么就可以只a修改变量就可以了
+OUTPUT=./bin/hello
+GCC=gcc
+SRC=./src/game.c ./src/main.c
+CONFIG=-I./inc
+
+# 想通过make编译项目，其实就是要通过make去执行gcc
+# 运行前，需要编译
+run:compile
+	$(OUTPUT)
+compile:clean
+	$(GCC) $(SRC) $(CONFIG)  -o $(OUTPUT)
+clean:
+	rm -rf $(OUTPUT)

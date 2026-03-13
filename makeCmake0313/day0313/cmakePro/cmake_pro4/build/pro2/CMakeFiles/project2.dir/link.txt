@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/project2.dir/src/main.c.o -o /mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro4/pro2/bin/project2 

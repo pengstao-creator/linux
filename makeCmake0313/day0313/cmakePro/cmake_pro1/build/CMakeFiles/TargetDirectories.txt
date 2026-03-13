@@ -1,0 +1,3 @@
+/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro1/build/CMakeFiles/hello.dir
+/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro1/build/CMakeFiles/edit_cache.dir
+/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro1/build/CMakeFiles/rebuild_cache.dir

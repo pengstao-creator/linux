@@ -1,0 +1,9 @@
+
+# 想通过make编译项目，其实就是要通过make去执行gcc
+# 运行前，需要编译
+run:compile
+	./bin/hello
+compile:clean
+	gcc ./src/game.c ./src/main.c -I./inc -o ./bin/hello
+clean:
+	rm -rf ./bin/hello
