@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/StaticLib_cmake/lib/libsubdivstatic.a CMakeFiles/sub_div_static.dir/src/sub.c.o CMakeFiles/sub_div_static.dir/src/divide.c.o
+/usr/bin/ranlib /home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/StaticLib_cmake/lib/libsubdivstatic.a

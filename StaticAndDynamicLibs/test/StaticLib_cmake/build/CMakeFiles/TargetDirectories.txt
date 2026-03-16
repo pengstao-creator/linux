@@ -1,0 +1,3 @@
+/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/StaticLib_cmake/build/CMakeFiles/sub_div_static.dir
+/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/StaticLib_cmake/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/StaticLib_cmake/build/CMakeFiles/rebuild_cache.dir
