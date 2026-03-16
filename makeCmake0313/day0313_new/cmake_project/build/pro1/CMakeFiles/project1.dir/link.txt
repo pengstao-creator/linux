@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/project1.dir/src/main.c.o -o /home/ubuntu/Embedded/linux/makeCmake0313/day0313_new/cmake_project/pro1/bin/project1 
