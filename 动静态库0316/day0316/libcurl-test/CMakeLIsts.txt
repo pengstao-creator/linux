@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.10.0)
+project(curlcmaketest VERSION 0.1.0 LANGUAGES C)
+
+# 1 查找curl库:如果要使用三方库，一定要u先去查找三方库，因为找到后就可以在cmake中ig使用别人定义 好的变量/函数
+find_package(CURL REQUIRED)
+# 如果找到curl库，输出信息
+if(CURL_FOUND)
+    message(STATUS "Found CURL: ${CURL_INCLUDE_DIRS}")
+else()
+    message(FATAL_ERROR "Could not find CURL library")
+endif(CURL_FOUND)
+
+
+# 2.设置头文件目录使得系统可以找到对应的头文件
+include_directories( 
+    ${CURL_INCLUDE_DIR}          #其他系统目录的头文件 也可以直接写路径 /usr/local/include/curl
+)
+
+
+#3 链接库到目标
+add_executable(curlcmaketest main.c) # 设置源文件路径
+# 加载链接库到项目中
+target_link_libraries(curlcmaketest PRIVATE ${CURL_LIBRARIES})  # /usr/local/lib
+

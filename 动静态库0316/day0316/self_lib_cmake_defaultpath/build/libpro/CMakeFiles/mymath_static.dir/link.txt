@@ -1,0 +1,2 @@
+/usr/bin/ar qc /mnt/hgfs/code/linuxc/day0316/self_lib_cmake_defaultpath/libpro/lib/libmymath_static.a CMakeFiles/mymath_static.dir/src/add.c.o
+/usr/bin/ranlib /mnt/hgfs/code/linuxc/day0316/self_lib_cmake_defaultpath/libpro/lib/libmymath_static.a
