@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/service.dir/src/UdpService.cpp.o -o /home/ubuntu/Embedded/linux/udp/bin/service  -lpthread 

@@ -1,0 +1,4 @@
+/home/ubuntu/Embedded/linux/udp/build/CMakeFiles/client.dir
+/home/ubuntu/Embedded/linux/udp/build/CMakeFiles/service.dir
+/home/ubuntu/Embedded/linux/udp/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/Embedded/linux/udp/build/CMakeFiles/rebuild_cache.dir
