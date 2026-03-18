@@ -39,3 +39,9 @@
 
 # debug information files
 *.dwo
+
+# 忽略可执行文件目录
+bin/
+
+# 忽略编译输出目录
+build/
