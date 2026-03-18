@@ -9,7 +9,7 @@ public:
     Client(const std::string& ip,uint16_t prot)
         :_sockptr(std::make_shared<UdpSocket>(prot,ip,AF_INET,SOCK_DGRAM))
     {}
-
+    ~Client(){_sockptr->Close();}
     void Start()
     {   
         //创建一个线程接受信息

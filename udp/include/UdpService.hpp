@@ -29,7 +29,7 @@ public:
         ,_udata(std::make_shared<std::map<std::string,uint16_t>>())
     {
     }
-
+    ~UdpService(){_sockptr->Close();}
     void Start()
     {
         //创建一个消息处理线程进行消息处理
