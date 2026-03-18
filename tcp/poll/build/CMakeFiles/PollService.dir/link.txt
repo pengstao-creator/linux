@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wall -g CMakeFiles/PollService.dir/src/socket.c.o CMakeFiles/PollService.dir/src/PollService.c.o -o /home/ubuntu/Embedded/linux/tcp/poll/bin/PollService 

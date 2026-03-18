@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wall -g CMakeFiles/EpollService.dir/src/socket.c.o CMakeFiles/EpollService.dir/src/EpollService.c.o -o /home/ubuntu/Embedded/linux/tcp/epoll/bin/EpollService 

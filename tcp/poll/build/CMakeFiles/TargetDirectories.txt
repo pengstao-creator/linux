@@ -1,0 +1,5 @@
+/home/ubuntu/Embedded/linux/tcp/poll/build/CMakeFiles/PollService.dir
+/home/ubuntu/Embedded/linux/tcp/poll/build/CMakeFiles/client.dir
+/home/ubuntu/Embedded/linux/tcp/poll/build/CMakeFiles/bin_directory.dir
+/home/ubuntu/Embedded/linux/tcp/poll/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/Embedded/linux/tcp/poll/build/CMakeFiles/rebuild_cache.dir
