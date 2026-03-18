@@ -1,1 +1,0 @@
-/usr/bin/cc  -Wall -g CMakeFiles/client.dir/src/socket.c.o CMakeFiles/client.dir/src/client.c.o -o /home/ubuntu/Embedded/linux/tcp/poll/bin/client 

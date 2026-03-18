@@ -1,5 +1,0 @@
-/home/ubuntu/Embedded/linux/tcp/select/build/CMakeFiles/SlectService.dir
-/home/ubuntu/Embedded/linux/tcp/select/build/CMakeFiles/client.dir
-/home/ubuntu/Embedded/linux/tcp/select/build/CMakeFiles/bin_directory.dir
-/home/ubuntu/Embedded/linux/tcp/select/build/CMakeFiles/edit_cache.dir
-/home/ubuntu/Embedded/linux/tcp/select/build/CMakeFiles/rebuild_cache.dir

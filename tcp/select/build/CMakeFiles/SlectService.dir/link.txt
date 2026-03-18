@@ -1,1 +1,0 @@
-/usr/bin/cc  -Wall -g CMakeFiles/SlectService.dir/src/socket.c.o CMakeFiles/SlectService.dir/src/SlectService.c.o -o /home/ubuntu/Embedded/linux/tcp/select/bin/SlectService 
