@@ -14,40 +14,37 @@ int maxk = 10;
 typedef struct threadData
 {
     pthread_t tid;
-    pthread_mutex_t * lock;
-    sem_t * semt;
+    pthread_rwlock_t * lock;
 }threadData;
 void * producer(void * tdata)
 {
     threadData * _tdata = (threadData*)tdata;
-    sem_t * semt = _tdata->semt;    
+    pthread_rwlock_t * lock = _tdata->lock;    
     while(1)
     {
-        sem_post(semt);
-        pthread_mutex_lock(_tdata->lock);
+        pthread_rwlock_wrlock(_tdata->lock);
         if(k >= maxk)
         {
-            pthread_mutex_unlock(_tdata->lock);
+            pthread_rwlock_unlock(_tdata->lock);
             break;
         }
         num++;
         k++;
        
-        pthread_mutex_unlock(_tdata->lock);
+        pthread_rwlock_unlock(_tdata->lock);
     }
     return NULL;
 }
 void * consumer(void * tdata)
 {
     threadData * _tdata = (threadData*)tdata;
-    sem_t * semt = _tdata->semt;    
+    pthread_rwlock_t * lock = _tdata->lock;    
     while(1)
     {
-        sem_wait(semt);
-        pthread_mutex_lock(_tdata->lock);
+        pthread_rwlock_rdlock(_tdata->lock);
         if(num == 0)
         {
-            pthread_mutex_unlock(_tdata->lock);
+            pthread_rwlock_unlock(_tdata->lock);
             break;
         }    
         if(num > 0)
@@ -55,30 +52,19 @@ void * consumer(void * tdata)
             num--;
             printf("num:%d\n",num);
         }
-        pthread_mutex_unlock(_tdata->lock);
+        pthread_rwlock_unlock(_tdata->lock);
     }
     return NULL;
 }
 int main()
 {
-    pthread_mutex_t lock;
-    pthread_mutex_init(&lock,NULL);
-    //确保信号量不存在
-    sem_unlink(SEM_NAME);
-    //创建命名信号量，初始值为0
-    sem_t * semt = sem_open(SEM_NAME, O_CREAT | O_EXCL, 0666, num);
-    if(semt == SEM_FAILED)
-    {
-        perror("sem_open");
-        exit(EXIT_FAILURE);
-    }
-    printf("main:%p\n",semt);
+    pthread_rwlock_t lock;
+    pthread_rwlock_init(&lock,NULL);
     int n = 5;
     threadData ptdatas[n];
     for(int i = 0;i < n;i++)
     {
         ptdatas[i].lock = &lock;
-        ptdatas[i].semt = semt;
         pthread_create(&ptdatas[i].tid,NULL,producer,&ptdatas[i]);
     }
 
@@ -86,7 +72,6 @@ int main()
     for(int i = 0;i < n;i++)
     {
         ctdatas[i].lock = &lock;
-        ctdatas[i].semt = semt;
         pthread_create(&ctdatas[i].tid,NULL,consumer,&ctdatas[i]);
     }
 
@@ -100,8 +85,7 @@ int main()
     {
         pthread_join(ctdatas[i].tid,NULL);
     }
+    pthread_rwlock_destroy(&lock);
     
-    sem_close(semt);
-    sem_unlink(SEM_NAME);
     return 0;
 }

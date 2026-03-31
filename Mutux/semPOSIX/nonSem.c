@@ -7,7 +7,7 @@
 #include <fcntl.h>
 //有名信号量，进行抢票操作
 typedef void*(HandlerFunc)(void*);  
-#define SEM_NAME "/name"
+
 int num = 10;
 int k = 0;
 int maxk = 10;
@@ -63,22 +63,16 @@ int main()
 {
     pthread_mutex_t lock;
     pthread_mutex_init(&lock,NULL);
-    //确保信号量不存在
-    sem_unlink(SEM_NAME);
-    //创建命名信号量，初始值为0
-    sem_t * semt = sem_open(SEM_NAME, O_CREAT | O_EXCL, 0666, num);
-    if(semt == SEM_FAILED)
-    {
-        perror("sem_open");
-        exit(EXIT_FAILURE);
-    }
-    printf("main:%p\n",semt);
+    //创建无名信号量，初始值为0
+    sem_t semt;
+    sem_init(&semt,0,num);
+
     int n = 5;
     threadData ptdatas[n];
     for(int i = 0;i < n;i++)
     {
         ptdatas[i].lock = &lock;
-        ptdatas[i].semt = semt;
+        ptdatas[i].semt = &semt;
         pthread_create(&ptdatas[i].tid,NULL,producer,&ptdatas[i]);
     }
 
@@ -86,7 +80,7 @@ int main()
     for(int i = 0;i < n;i++)
     {
         ctdatas[i].lock = &lock;
-        ctdatas[i].semt = semt;
+        ctdatas[i].semt = &semt;
         pthread_create(&ctdatas[i].tid,NULL,consumer,&ctdatas[i]);
     }
 
@@ -101,7 +95,6 @@ int main()
         pthread_join(ctdatas[i].tid,NULL);
     }
     
-    sem_close(semt);
-    sem_unlink(SEM_NAME);
+    sem_close(&semt);
     return 0;
 }
