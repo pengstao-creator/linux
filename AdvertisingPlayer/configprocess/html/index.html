@@ -2,255 +2,160 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>路由器配置 | 管理后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备配置</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: linear-gradient(145deg, #101418 0%, #1b212c 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #f4f7fb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: #1f2937;
             padding: 24px;
         }
-
-        .card {
-            max-width: 680px;
-            width: 100%;
-            background: rgba(22, 28, 38, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 40px;
-            border: 1px solid rgba(72, 187, 255, 0.25);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(72, 187, 255, 0.2);
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .panel {
+            max-width: 760px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 28px 34px 30px;
         }
-
-        .card-header {
-            background: rgba(0, 20, 40, 0.7);
-            padding: 28px 32px;
-            border-bottom: 1px solid rgba(72, 187, 255, 0.3);
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #0f172a;
         }
-
-        .card-header h1 {
-            font-size: 1.9rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #e0f0ff, #7ac8ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
-
-        .card-header p {
-            color: #8e9aaf;
-            margin-top: 8px;
-            font-size: 0.9rem;
-        }
-
-        .form-container {
-            padding: 32px;
-        }
-
-        .input-group {
-            margin-bottom: 24px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #b3ceff;
-            margin-bottom: 8px;
-        }
-
-        input, select {
-            background: #0f1219;
-            border: 1px solid #2c3545;
-            border-radius: 20px;
-            padding: 12px 18px;
-            font-size: 1rem;
-            color: #f0f3fa;
-            transition: all 0.2s;
-            outline: none;
-            font-family: inherit;
-        }
-
-        input:focus, select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            background: #0b0f17;
-        }
-
-        .row-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .helper-text {
-            font-size: 0.7rem;
-            color: #6b7c93;
-            margin-top: 6px;
-            margin-left: 12px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(95deg, #1e3c72, #2b4f8c);
+        .divider {
             border: none;
-            border-radius: 36px;
-            padding: 14px;
-            font-size: 1.1rem;
+            border-top: 1px solid #e5e7eb;
+            margin-bottom: 28px;
+        }
+        h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 18px 0 18px;
+            color: #1e293b;
+        }
+        .group { margin-bottom: 24px; }
+        .label {
+            display: block;
+            font-size: 38px;
             font-weight: 600;
-            color: white;
+            margin-bottom: 10px;
+            color: #334155;
+        }
+        .control {
+            width: 100%;
+            height: 72px;
+            border: 1px solid #d9dee7;
+            border-radius: 9px;
+            font-size: 38px;
+            padding: 0 20px;
+            color: #111827;
+            background: #fff;
+            outline: none;
+        }
+        .control::placeholder { color: #9ca3af; }
+        .control:focus {
+            border-color: #4c8dff;
+            box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.18);
+        }
+        .actions {
+            margin-top: 26px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 14px;
+        }
+        .btn {
+            min-width: 126px;
+            height: 62px;
+            border-radius: 9px;
+            font-size: 34px;
+            border: 1px solid transparent;
             cursor: pointer;
-            transition: 0.2s;
-            margin-top: 16px;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.5px;
         }
-
-        .btn-submit:hover {
-            background: linear-gradient(95deg, #2b4f8c, #1e6f9f);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        .btn-reset {
+            background: #f3f4f6;
+            color: #374151;
+            border-color: #e5e7eb;
         }
-
-        .btn-submit:active {
-            transform: translateY(1px);
+        .btn-submit {
+            background: #4b88ff;
+            color: #ffffff;
         }
-
-        hr {
-            border-color: #2c3545;
-            margin: 20px 0 8px;
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #5f6e84;
-            margin-top: 24px;
-        }
-
-        @media (max-width: 550px) {
-            .card-header { padding: 20px 24px; }
-            .form-container { padding: 24px; }
-            .row-2col { grid-template-columns: 1fr; gap: 16px; }
+        @media (max-width: 900px) {
+            h1, h2 { font-size: 30px; }
+            .label, .control { font-size: 22px; }
+            .control { height: 52px; }
+            .btn { font-size: 22px; height: 48px; min-width: 96px; }
         }
     </style>
 </head>
 <body>
-<div class="card">
-    <div class="card-header">
-        <h1>⚙️ 路由器配置</h1>
-        <p>无线网络 · 安全 · 高级设置</p>
-    </div>
-    <div class="form-container">
-        <form id="routerConfigForm">
-            <!-- 无线网络 -->
-            <div class="input-group">
-                <label>📡 无线 SSID (网络名称)</label>
-                <input type="text" id="ssid" name="ssid" placeholder="例: MyHome_5G" value="RouterPro_2.4G" required>
-                <div class="helper-text">2.4GHz / 5GHz 共用标识</div>
-            </div>
+<div class="panel">
+    <h1>设备配置</h1>
+    <hr class="divider">
+    <form id="deviceConfigForm">
+        <h2>配网信息</h2>
+        <div class="group">
+            <label class="label" for="backendUrl">后端地址</label>
+            <input class="control" id="backendUrl" name="backendUrl" placeholder="例如: http://api.example.com" required>
+        </div>
+        <div class="group">
+            <label class="label" for="mqttUrl">MQTT地址</label>
+            <input class="control" id="mqttUrl" name="mqttUrl" placeholder="例如: mqtt://broker.example.com:1883" required>
+        </div>
+        <div class="group">
+            <label class="label" for="wifiName">WiFi名称</label>
+            <input class="control" id="wifiName" name="wifiName" placeholder="输入WiFi SSID" required>
+        </div>
+        <div class="group">
+            <label class="label" for="wifiPwd">WiFi密码</label>
+            <input class="control" id="wifiPwd" name="wifiPwd" type="password" placeholder="输入WiFi密码" required>
+        </div>
 
-            <div class="input-group">
-                <label>🔐 无线密码 (WPA2-PSK)</label>
-                <input type="password" id="wifiPwd" name="wifiPwd" placeholder="至少8位" value="SecurePass123" required minlength="8">
-                <div class="helper-text">最少8个字符，建议字母+数字</div>
-            </div>
+        <h2>设备信息</h2>
+        <div class="group">
+            <label class="label" for="chip">片区</label>
+            <select class="control" id="chip" name="chip" required>
+                <option value="">请选择片区</option>
+                <option value="A区">A区</option>
+                <option value="B区">B区</option>
+                <option value="C区">C区</option>
+            </select>
+        </div>
+        <div class="group">
+            <label class="label" for="detailAddr">详细地址</label>
+            <input class="control" id="detailAddr" name="detailAddr" placeholder="输入详细安装地址" required>
+        </div>
 
-            <!-- 管理员账户 -->
-            <div class="input-group">
-                <label>🛡️ 管理员新密码</label>
-                <input type="password" id="adminPwd" name="adminPwd" placeholder="用于登录路由器后台" value="Admin@2025" required minlength="6">
-            </div>
-
-            <div class="row-2col">
-                <div class="input-group">
-                    <label>🌐 LAN IP 地址</label>
-                    <input type="text" id="lanIp" name="lanIp" placeholder="192.168.1.1" value="192.168.31.1" pattern="^(\d{1,3}\.){3}\d{1,3}$">
-                    <div class="helper-text">默认: 192.168.31.1</div>
-                </div>
-                <div class="input-group">
-                    <label>⏱️ 时区</label>
-                    <select id="timezone" name="timezone">
-                        <option value="Asia/Shanghai">北京时间 (UTC+8)</option>
-                        <option value="Asia/Tokyo">东京 (UTC+9)</option>
-                        <option value="America/New_York">纽约 (UTC-5)</option>
-                        <option value="Europe/London">伦敦 (UTC+0)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>📡 高级特性 (可选)</label>
-                <input type="text" id="feature" name="feature" placeholder="例如: QoS, Mesh, VPN" value="智能 QoS">
-            </div>
-
-            <button type="submit" class="btn-submit">保存并应用配置 →</button>
-            <div class="footer-note">修改后路由器将自动重启生效</div>
-        </form>
-    </div>
+        <div class="actions">
+            <button type="reset" class="btn btn-reset">重置</button>
+            <button type="submit" class="btn btn-submit">提交配置</button>
+        </div>
+    </form>
 </div>
 
 <script>
-    (function() {
-        const form = document.getElementById('routerConfigForm');
-
-        form.addEventListener('submit', function(e) {
+    (function () {
+        const form = document.getElementById('deviceConfigForm');
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
-
-            // 获取表单数据
-            const ssid = document.getElementById('ssid').value.trim();
-            const wifiPwd = document.getElementById('wifiPwd').value;
-            const adminPwd = document.getElementById('adminPwd').value;
-            const lanIp = document.getElementById('lanIp').value.trim();
-            const timezone = document.getElementById('timezone').value;
-            const feature = document.getElementById('feature').value.trim();
-
-            // 简单前端校验
-            if (!ssid) {
-                alert('请填写无线网络名称 (SSID)');
+            const formData = new FormData(form);
+            const payload = new URLSearchParams(formData);
+            const displayData = {};
+            formData.forEach((v, k) => { displayData[k] = String(v); });
+            const res = await fetch('/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: payload.toString()
+            });
+            if (!res.ok) {
+                alert('提交失败，请稍后重试');
                 return;
             }
-            if (wifiPwd.length < 8) {
-                alert('无线密码长度不能少于8位');
-                return;
-            }
-            if (adminPwd.length < 6) {
-                alert('管理员密码长度至少6位');
-                return;
-            }
-            // IP 地址简单正则校验（如果填写了）
-            if (lanIp && !/^(\d{1,3}\.){3}\d{1,3}$/.test(lanIp)) {
-                alert('LAN IP 地址格式不正确 (例: 192.168.1.1)');
-                return;
-            }
-
-            // 存储到 sessionStorage，供成功页面读取
-            const configData = {
-                ssid: ssid,
-                wifiPwd: wifiPwd,
-                adminPwd: adminPwd,
-                lanIp: lanIp || '192.168.31.1',
-                timezone: timezone,
-                feature: feature || '未启用'
-            };
-            sessionStorage.setItem('routerConfig', JSON.stringify(configData));
-
-            // 跳转到成功页面
+            sessionStorage.setItem('deviceConfig', JSON.stringify(displayData));
             window.location.href = 'form_response.html';
         });
     })();

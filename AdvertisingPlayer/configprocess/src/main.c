@@ -1,5 +1,32 @@
 #include "configprocess.h"
 
+
+void fn(struct mg_connection *c, int ev, void *ev_data)
+{
+    if (ev == MG_EV_HTTP_MSG) {
+        struct mg_http_message *hm = (struct mg_http_message *) ev_data;
+
+        // 处理根路径请求，返回 index.html 文件
+        if(mg_match(hm->uri, mg_str("/form_response.html"), NULL))
+        {
+            struct mg_http_serve_opts opts = {.root_dir = "."};
+            mg_http_serve_file(c, hm,RESPONSE , &opts);
+        }
+        else if (mg_match(hm->uri, mg_str("/submit"), NULL)) 
+        {
+            parseConfig(c,hm);
+            
+            
+        }
+        else 
+        {
+            // 直接返回 index.html 文件
+            struct mg_http_serve_opts opts = {.root_dir = "."};
+            mg_http_serve_file(c, hm, HTML_ROOT, &opts);
+        }
+    }
+}
+
 int main()
 {
     struct mg_mgr mgr;          // 1. 声明一个事件管理器

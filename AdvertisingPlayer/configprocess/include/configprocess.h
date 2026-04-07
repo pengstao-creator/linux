@@ -4,7 +4,5 @@
 
 #define HTML_ROOT "../html/index.html"
 #define RESPONSE "../html/form_response.html"
-
-void fn(struct mg_connection *c, int ev, void *ev_data);
-
+void parseConfig(struct mg_connection *c,struct mg_http_message *hm);
 #endif
