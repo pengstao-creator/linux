@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置已生效 | 路由器管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 30%, #0a0f1c, #05080f);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .success-card {
+            max-width: 620px;
+            width: 100%;
+            background: rgba(18, 25, 40, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.2);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .success-header {
+            background: rgba(0, 40, 20, 0.6);
+            padding: 32px 32px 24px;
+            text-align: center;
+            border-bottom: 1px solid #2e7d5e;
+        }
+
+        .check-icon {
+            font-size: 4rem;
+            background: #22c55e20;
+            width: 80px;
+            height: 80px;
+            line-height: 1;
+            border-radius: 80px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid #22c55e;
+            color: #4ade80;
+        }
+
+        .success-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4ffd4;
+            letter-spacing: -0.3px;
+        }
+
+        .success-header p {
+            color: #90c7b6;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .config-preview {
+            padding: 28px 32px 32px;
+        }
+
+        .preview-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #6e9eff;
+            margin-bottom: 20px;
+            border-left: 3px solid #3b82f6;
+            padding-left: 14px;
+        }
+
+        .config-list {
+            background: #0a0e18;
+            border-radius: 28px;
+            padding: 8px 0;
+            border: 1px solid #232a3a;
+        }
+
+        .config-item {
+            display: flex;
+            padding: 14px 24px;
+            border-bottom: 1px solid #1b212e;
+            flex-wrap: wrap;
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-label {
+            width: 130px;
+            font-weight: 600;
+            color: #b9d0ff;
+            font-size: 0.85rem;
+        }
+
+        .config-value {
+            flex: 1;
+            color: #eef4ff;
+            word-break: break-all;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .alert-note {
+            background: #2c3e2e30;
+            border-left: 4px solid #facc15;
+            padding: 16px 20px;
+            border-radius: 24px;
+            margin: 24px 0 16px;
+            font-size: 0.85rem;
+            color: #fde047;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 6px #1e3a8a40;
+        }
+
+        .btn-primary:hover {
+            background: #3b82f6;
+            transform: scale(0.98);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4b6e9e;
+            color: #b9d0ff;
+        }
+
+        .btn-outline:hover {
+            background: #1e293b;
+            border-color: #7aa9ff;
+        }
+
+        .footer-tip {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.7rem;
+            color: #5b6f8c;
+        }
+    </style>
+</head>
+<body>
+<div class="success-card">
+    <div class="success-header">
+        <div class="check-icon">✓</div>
+        <h1>配置已提交</h1>
+        <p>路由器正在应用新设置 · 预计10秒后生效</p>
+    </div>
+    <div class="config-preview">
+        <div class="preview-title">📋 当前生效配置摘要</div>
+        <div class="config-list" id="configList">
+            <!-- 动态注入配置数据 -->
+            <div class="config-item"><span class="config-label">SSID:</span><span class="config-value" id="dispSsid">—</span></div>
+            <div class="config-item"><span class="config-label">无线安全:</span><span class="config-value" id="dispWifiPwd">••••••••</span></div>
+            <div class="config-item"><span class="config-label">管理员密码:</span><span class="config-value" id="dispAdminPwd">••••••</span></div>
+            <div class="config-item"><span class="config-label">LAN IP:</span><span class="config-value" id="dispLanIp">—</span></div>
+            <div class="config-item"><span class="config-label">时区:</span><span class="config-value" id="dispTimezone">—</span></div>
+            <div class="config-item"><span class="config-label">高级特性:</span><span class="config-value" id="dispFeature">—</span></div>
+        </div>
+
+        <div class="alert-note">
+            ⚡ 注意：如果修改了无线密码或管理密码，请使用新凭证重新连接。
+        </div>
+
+        <div class="action-buttons">
+            <a href="config.html" class="btn btn-outline">← 返回配置页</a>
+            <a href="#" class="btn btn-primary" id="rebootMock">重启路由器 (模拟)</a>
+        </div>
+        <div class="footer-tip">
+            提示：配置已保存在会话中，页面刷新后不会丢失。
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // 从 sessionStorage 读取配置数据
+        const stored = sessionStorage.getItem('routerConfig');
+        if (!stored) {
+            // 没有数据时显示默认占位或提示（可能是直接访问成功页）
+            document.getElementById('dispSsid').innerText = '未读取到配置';
+            document.getElementById('dispWifiPwd').innerText = '---';
+            document.getElementById('dispAdminPwd').innerText = '---';
+            document.getElementById('dispLanIp').innerText = '192.168.1.1';
+            document.getElementById('dispTimezone').innerText = 'UTC+8';
+            document.getElementById('dispFeature').innerText = '默认QoS';
+        } else {
+            try {
+                const cfg = JSON.parse(stored);
+                document.getElementById('dispSsid').innerText = cfg.ssid || '未命名';
+                // 密码掩码显示（只显示长度或星号，不暴露原文，但可显示实际长度）
+                const wifiStar = '●'.repeat(Math.min(cfg.wifiPwd?.length || 8, 12));
+                document.getElementById('dispWifiPwd').innerText = wifiStar + ` (${cfg.wifiPwd?.length || 0}位)`;
+                const adminStar = '●'.repeat(Math.min(cfg.adminPwd?.length || 6, 10));
+                document.getElementById('dispAdminPwd').innerText = adminStar + ` (已设)`;
+                document.getElementById('dispLanIp').innerText = cfg.lanIp || '192.168.31.1';
+                let tzText = cfg.timezone || 'Asia/Shanghai';
+                if (tzText === 'Asia/Shanghai') tzText = '北京时间 (UTC+8)';
+                if (tzText === 'Asia/Tokyo') tzText = '东京 (UTC+9)';
+                if (tzText === 'America/New_York') tzText = '纽约 (UTC-5)';
+                if (tzText === 'Europe/London') tzText = '伦敦 (UTC+0)';
+                document.getElementById('dispTimezone').innerText = tzText;
+                document.getElementById('dispFeature').innerText = cfg.feature || '未配置';
+            } catch(e) {
+                console.warn(e);
+            }
+        }
+
+        // 模拟重启路由器按钮
+        const rebootBtn = document.getElementById('rebootMock');
+        rebootBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🔁 模拟重启中... 路由器将在5秒后重新上线。\n（实际环境中此操作会使设备断连）');
+            // 可加一个简单倒计时，或者仅仅提醒
+        });
+
+        // 可选：如果没有任何session数据，提示需要从配置页提交
+        if (!stored) {
+            const container = document.querySelector('.alert-note');
+            const warnMsg = document.createElement('div');
+            warnMsg.style.marginTop = '12px';
+            warnMsg.style.color = '#ffb347';
+            warnMsg.style.fontSize = '0.8rem';
+            warnMsg.innerText = '⚠️ 尚未检测到新配置，请先通过“路由器配置”页面提交。';
+            container.parentNode.insertBefore(warnMsg, container.nextSibling);
+        }
+    })();
+</script>
+</body>
+</html>

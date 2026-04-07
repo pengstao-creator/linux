@@ -5,4 +5,4 @@ mongoosetest: momgoosetest.c $(MONGOOSE_SRC)
 	@gcc -o $@ $^ -I $(MONGOOSE_INC) -lpthread
 .PHONY:clean
 clean:
-	rm -rf mongoosetest
+	@rm -rf mongoosetest
