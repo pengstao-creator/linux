@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/ubuntu/Embedded/linux/makeCmake0313/build",
-  "command": "/usr/bin/cc   -g -o CMakeFiles/makeCmake0313.dir/main.c.o -c /home/ubuntu/Embedded/linux/makeCmake0313/main.c",
-  "file": "/home/ubuntu/Embedded/linux/makeCmake0313/main.c",
-  "output": "CMakeFiles/makeCmake0313.dir/main.c.o"
-}
-]

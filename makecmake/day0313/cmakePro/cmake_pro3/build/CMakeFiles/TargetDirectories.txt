@@ -1,9 +1,0 @@
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/cmakePro3.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/package.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/package_source.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/edit_cache.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/rebuild_cache.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/list_install_components.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/install.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/install/local.dir
-/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro3/build/CMakeFiles/install/strip.dir

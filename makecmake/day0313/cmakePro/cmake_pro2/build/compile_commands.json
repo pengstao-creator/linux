@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro2/build",
-  "command": "/usr/bin/cc   -g -o CMakeFiles/cmake_pro2.dir/main.c.o -c /mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro2/main.c",
-  "file": "/mnt/hgfs/code/linuxc/day0313/cmakePro/cmake_pro2/main.c",
-  "output": "CMakeFiles/cmake_pro2.dir/main.c.o"
-}
-]

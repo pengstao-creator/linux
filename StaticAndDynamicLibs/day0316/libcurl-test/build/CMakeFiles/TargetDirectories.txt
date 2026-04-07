@@ -1,3 +1,0 @@
-/mnt/hgfs/code/linuxc/day0316/libcurl-test/build/CMakeFiles/curlcmaketest.dir
-/mnt/hgfs/code/linuxc/day0316/libcurl-test/build/CMakeFiles/edit_cache.dir
-/mnt/hgfs/code/linuxc/day0316/libcurl-test/build/CMakeFiles/rebuild_cache.dir

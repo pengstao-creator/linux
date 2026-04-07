@@ -1,3 +1,0 @@
-/home/ubuntu/Embedded/linux/makeCmake0313/build/CMakeFiles/makeCmake0313.dir
-/home/ubuntu/Embedded/linux/makeCmake0313/build/CMakeFiles/edit_cache.dir
-/home/ubuntu/Embedded/linux/makeCmake0313/build/CMakeFiles/rebuild_cache.dir

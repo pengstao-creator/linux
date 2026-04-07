@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/makeCmake0313.dir/main.c.o -o makeCmake0313 

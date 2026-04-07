@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/mnt/hgfs/code/linuxc/day0316/libcurl-test/build",
-  "command": "/usr/bin/cc   -g -o CMakeFiles/curlcmaketest.dir/main.c.o -c /mnt/hgfs/code/linuxc/day0316/libcurl-test/main.c",
-  "file": "/mnt/hgfs/code/linuxc/day0316/libcurl-test/main.c",
-  "output": "CMakeFiles/curlcmaketest.dir/main.c.o"
-}
-]

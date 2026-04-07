@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/curlcmaketest.dir/main.c.o -o curlcmaketest  -Wl,-rpath,/usr/local/lib /usr/local/lib/libcurl.so 

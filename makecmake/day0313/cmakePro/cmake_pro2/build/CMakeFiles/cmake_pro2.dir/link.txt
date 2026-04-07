@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/cmake_pro2.dir/main.c.o -o cmake_pro2 

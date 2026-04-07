@@ -1,2 +1,0 @@
-/usr/local/bin/cmakePro3
-/usr/local/include/game.h

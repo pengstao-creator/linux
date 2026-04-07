@@ -1,3 +1,0 @@
-/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/DynamicLib_cmake/build/CMakeFiles/mul_dynamic.dir
-/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/DynamicLib_cmake/build/CMakeFiles/edit_cache.dir
-/home/ubuntu/Embedded/linux/StaticAndDynamicLibs/test/DynamicLib_cmake/build/CMakeFiles/rebuild_cache.dir
