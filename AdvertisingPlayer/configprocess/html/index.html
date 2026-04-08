@@ -100,19 +100,19 @@
         <h2>配网信息</h2>
         <div class="group">
             <label class="label" for="backendUrl">后端地址</label>
-            <input class="control" id="backendUrl" name="backendUrl" placeholder="例如: http://api.example.com" required>
+            <input class="control" id="backendUrl" name="backendUrl" placeholder="例如: http://api.example.com" value="http://115.159.78.192:8888" required>
         </div>
         <div class="group">
             <label class="label" for="mqttUrl">MQTT地址</label>
-            <input class="control" id="mqttUrl" name="mqttUrl" placeholder="例如: mqtt://broker.example.com:1883" required>
+            <input class="control" id="mqttUrl" name="mqttUrl" placeholder="例如: mqtt://broker.example.com:1883" value="http://115.159.78.192:8888" required>
         </div>
         <div class="group">
             <label class="label" for="wifiName">WiFi名称</label>
-            <input class="control" id="wifiName" name="wifiName" placeholder="输入WiFi SSID" required>
+            <input class="control" id="wifiName" name="wifiName" placeholder="输入WiFi SSID" value="企鹅王二" required>
         </div>
         <div class="group">
             <label class="label" for="wifiPwd">WiFi密码</label>
-            <input class="control" id="wifiPwd" name="wifiPwd" type="password" placeholder="输入WiFi密码" required>
+            <input class="control" id="wifiPwd" name="wifiPwd" type="password" placeholder="输入WiFi密码" value="12345678" required>
         </div>
 
         <h2>设备信息</h2>
@@ -121,13 +121,13 @@
             <select class="control" id="chip" name="chip" required>
                 <option value="">请选择片区</option>
                 <option value="A区">A区</option>
-                <option value="B区">B区</option>
+                <option value="B区" selected>B区</option>
                 <option value="C区">C区</option>
             </select>
         </div>
         <div class="group">
             <label class="label" for="detailAddr">详细地址</label>
-            <input class="control" id="detailAddr" name="detailAddr" placeholder="输入详细安装地址" required>
+            <input class="control" id="detailAddr" name="detailAddr" placeholder="输入详细安装地址" value="2343" required>
         </div>
 
         <div class="actions">
