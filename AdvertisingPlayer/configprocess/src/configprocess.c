@@ -14,20 +14,24 @@ void parseConfig(struct mg_connection *c,struct mg_http_message *hm)
     char wifiPwd[SIZE128] = {0};
     char chip[SIZE64] = {0};
     char detailAddr[SIZE256] = {0};
+    char mqttAccount[SIZE128] = {0};
+    char mqttPassword[SIZE128] = {0};
     mg_http_get_var(&hm->body, "backendUrl", backendUrl, sizeof(backendUrl));
     mg_http_get_var(&hm->body, "mqttUrl", mqttUrl, sizeof(mqttUrl));
     mg_http_get_var(&hm->body, "wifiName", wifiName, sizeof(wifiName));
     mg_http_get_var(&hm->body, "wifiPwd", wifiPwd, sizeof(wifiPwd));
     mg_http_get_var(&hm->body, "chip", chip, sizeof(chip));
     mg_http_get_var(&hm->body, "detailAddr", detailAddr, sizeof(detailAddr));
+    mg_http_get_var(&hm->body, "mqttAccount", mqttAccount, sizeof(mqttAccount));
+    mg_http_get_var(&hm->body, "mqttPassword", mqttPassword, sizeof(mqttPassword));
 
     MLOG_D("提交配置: backendUrl=%s mqttUrl=%s wifiName=%s chip=%s detailAddr=%s\n",
-            backendUrl, mqttUrl, wifiName, chip, detailAddr);
+            backendUrl, mqttUrl, wifiName, chip, detailAddr,mqttAccount);
 
     mg_http_reply(c, 200, "Content-Type: application/json; charset=utf-8\r\n",
                     "{\"ok\":1,\"message\":\"received\"}\n");
     
-    
+    //将配置写入文件
     gchar * configpath = getConfigPath();
     MLOG_D("配置文件路径:%s",configpath ? configpath : "(null)");
     if(!configpath) return;
@@ -35,12 +39,14 @@ void parseConfig(struct mg_connection *c,struct mg_http_message *hm)
     GKeyFile * newfile = g_key_file_new();
     GError * gerror = NULL;
     g_key_file_set_string(newfile,"serverAddress","backendUrl",backendUrl);
-    g_key_file_set_string(newfile,"serverAddress","mqttUrl",mqttUrl);
+    g_key_file_set_string(newfile,"mqtt","mqttUrl",mqttUrl);
+    g_key_file_set_string(newfile,"mqtt","mqttAccount",mqttAccount);
+    g_key_file_set_string(newfile,"mqtt","mqttPassword",mqttPassword);
     g_key_file_set_string(newfile,"wifi","wifiName",wifiName);
     g_key_file_set_string(newfile,"wifi","wifiPwd",wifiPwd);
     g_key_file_set_string(newfile,"Address","chip",chip);
     g_key_file_set_string(newfile,"Address","detailAddr",detailAddr);
-    
+
     if(!g_key_file_save_to_file(newfile,configpath,&gerror))
     {
         handleError("配置写入文件失败",gerror);

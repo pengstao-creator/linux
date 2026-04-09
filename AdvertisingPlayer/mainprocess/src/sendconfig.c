@@ -70,3 +70,10 @@ void sendConfigRequest(const char * inipath)
     }
     
 }
+
+
+//
+void sendHearRequest(const char* inipath)
+{
+    
+}
