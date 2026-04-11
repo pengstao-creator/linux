@@ -6,36 +6,86 @@
     <title>设备配置</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg0: #070b1a;
+            --bg1: #0b1b3a;
+            --card: rgba(255, 255, 255, 0.08);
+            --card2: rgba(255, 255, 255, 0.12);
+            --stroke: rgba(255, 255, 255, 0.16);
+            --text: rgba(255, 255, 255, 0.92);
+            --muted: rgba(255, 255, 255, 0.68);
+            --brand: #7c3aed;
+            --brand2: #22d3ee;
+            --shadow: 0 18px 60px rgba(0,0,0,0.45);
+        }
         body {
-            background: #f4f7fb;
+            min-height: 100vh;
+            background:
+                radial-gradient(1200px 600px at 20% 10%, rgba(124, 58, 237, 0.35), transparent 60%),
+                radial-gradient(900px 500px at 80% 20%, rgba(34, 211, 238, 0.25), transparent 60%),
+                radial-gradient(900px 600px at 55% 90%, rgba(59, 130, 246, 0.18), transparent 60%),
+                linear-gradient(180deg, var(--bg0), var(--bg1));
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-            color: #1f2937;
-            padding: 24px;
+            color: var(--text);
+            padding: 26px;
         }
         .panel {
-            max-width: 760px;
+            max-width: 860px;
             margin: 0 auto;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
+            background: linear-gradient(180deg, var(--card2), var(--card));
+            border: 1px solid var(--stroke);
+            border-radius: 18px;
             padding: 28px 34px 30px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
         }
         h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 18px;
-            color: #0f172a;
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: 0.6px;
+            background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.76));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .divider {
             border: none;
-            border-top: 1px solid #e5e7eb;
+            border-top: 1px solid rgba(255,255,255,0.16);
             margin-bottom: 28px;
         }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .tab {
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.86);
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .tab.active {
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.92), rgba(34, 211, 238, 0.85));
+            border-color: rgba(255,255,255,0.18);
+            color: #091124;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.35);
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
         h2 {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
-            margin: 18px 0 18px;
-            color: #1e293b;
+            margin: 6px 0 18px;
+            color: rgba(255,255,255,0.92);
         }
         .group { margin-bottom: 24px; }
         .label {
@@ -43,23 +93,29 @@
             font-size: 38px;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #334155;
+            color: rgba(255,255,255,0.78);
         }
         .control {
             width: 100%;
             height: 72px;
-            border: 1px solid #d9dee7;
+            border: 1px solid rgba(255,255,255,0.18);
             border-radius: 9px;
             font-size: 38px;
             padding: 0 20px;
-            color: #111827;
-            background: #fff;
+            color: rgba(255,255,255,0.92);
+            background: rgba(7,11,26,0.35);
             outline: none;
         }
-        .control::placeholder { color: #9ca3af; }
+        .control::placeholder { color: rgba(255,255,255,0.45); }
         .control:focus {
-            border-color: #4c8dff;
-            box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.18);
+            border-color: rgba(34, 211, 238, 0.55);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.18);
+        }
+        .page-actions {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
         }
         .actions {
             margin-top: 26px;
@@ -76,19 +132,29 @@
             cursor: pointer;
         }
         .btn-reset {
-            background: #f3f4f6;
-            color: #374151;
-            border-color: #e5e7eb;
+            background: rgba(255,255,255,0.10);
+            color: rgba(255,255,255,0.90);
+            border-color: rgba(255,255,255,0.14);
         }
         .btn-submit {
-            background: #4b88ff;
-            color: #ffffff;
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.92), rgba(34, 211, 238, 0.85));
+            color: #091124;
+        }
+        .btn-next {
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.92), rgba(34, 211, 238, 0.85));
+            color: #091124;
+        }
+        .btn-prev {
+            background: rgba(255,255,255,0.10);
+            color: rgba(255,255,255,0.90);
+            border-color: rgba(255,255,255,0.14);
         }
         @media (max-width: 900px) {
             h1, h2 { font-size: 30px; }
             .label, .control { font-size: 22px; }
             .control { height: 52px; }
             .btn { font-size: 22px; height: 48px; min-width: 96px; }
+            .tab { font-size: 20px; padding: 8px 16px; }
         }
     </style>
 </head>
@@ -97,45 +163,81 @@
     <h1>设备配置</h1>
     <hr class="divider">
     <form id="deviceConfigForm">
-        <h2>配网信息</h2>
-        <div class="group">
-            <label class="label" for="backendUrl">后端地址</label>
-            <input class="control" id="backendUrl" name="backendUrl" placeholder="例如: http://api.example.com" value="http://115.159.78.192:8888" required>
-        </div>
-        <div class="group">
-            <label class="label" for="mqttUrl">MQTT地址</label>
-            <input class="control" id="mqttUrl" name="mqttUrl" placeholder="例如: mqtt://broker.example.com:1883" value="http://115.159.78.192:8888" required>
-        </div>
-        <div class="group">
-            <label class="label" for="mqttAccount">MQTT账户</label>
-            <input class="control" id="mqttAccount" name="mqttAccount" placeholder="输入MQTT账户" required>
-        </div>
-        <div class="group">
-            <label class="label" for="mqttPassword">MQTT密码</label>
-            <input class="control" id="mqttPassword" name="mqttPassword" type="password" placeholder="输入MQTT密码" required>
-        </div>
-        <div class="group">
-            <label class="label" for="wifiName">WiFi名称</label>
-            <input class="control" id="wifiName" name="wifiName" placeholder="输入WiFi SSID" value="企鹅王二" required>
-        </div>
-        <div class="group">
-            <label class="label" for="wifiPwd">WiFi密码</label>
-            <input class="control" id="wifiPwd" name="wifiPwd" type="password" placeholder="输入WiFi密码" value="12345678" required>
+        <div class="tabs" id="tabs">
+            <button type="button" class="tab active" data-index="0">服务器地址</button>
+            <button type="button" class="tab" data-index="1">MQTT</button>
+            <button type="button" class="tab" data-index="2">WiFi</button>
+            <button type="button" class="tab" data-index="3">地址</button>
         </div>
 
-        <h2>设备信息</h2>
-        <div class="group">
-            <label class="label" for="chip">片区</label>
-            <select class="control" id="chip" name="chip" required>
-                <option value="">请选择片区</option>
-                <option value="A区">A区</option>
-                <option value="B区" selected>B区</option>
-                <option value="C区">C区</option>
-            </select>
-        </div>
-        <div class="group">
-            <label class="label" for="detailAddr">详细地址</label>
-            <input class="control" id="detailAddr" name="detailAddr" placeholder="输入详细安装地址" value="2343" required>
+        <section class="tab-panel active" data-index="0">
+            <h2>服务器地址</h2>
+            <div class="group">
+                <label class="label" for="backendUrl">后端地址</label>
+                <input class="control" id="backendUrl" name="backendUrl" placeholder="例如: http://api.example.com" value="http://115.159.78.192:8888" required>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-index="1">
+            <h2>MQTT配置</h2>
+            <div class="group">
+                <label class="label" for="mqttUrl">MQTT地址</label>
+                <input class="control" id="mqttUrl" name="mqttUrl" placeholder="例如: mqtt://broker.example.com:1883" value="mqtt://115.159.78.192:1883" required>
+            </div>
+            <div class="group">
+                <label class="label" for="mqttUsername">MQTT账户</label>
+                <input class="control" id="mqttUsername" name="mqttUsername" placeholder="输入MQTT账户" value="pst" required>
+            </div>
+            <div class="group">
+                <label class="label" for="mqttPassword">MQTT密码</label>
+                <input class="control" id="mqttPassword" name="mqttPassword" type="password" placeholder="输入MQTT密码" value="123456" required>
+            </div>
+            <div class="group">
+                <label class="label" for="heartbeatTopic">心跳主题</label>
+                <input class="control" id="heartbeatTopic" name="heartbeatTopic" placeholder="例如: device/heartbeat" value="device/heartbeat" required>
+            </div>
+            <div class="group">
+                <label class="label" for="commandTopic">命令主题</label>
+                <input class="control" id="commandTopic" name="commandTopic" placeholder="例如: device/command" value="device/command" required>
+            </div>
+            <div class="group">
+                <label class="label" for="advertTopic">广告主题</label>
+                <input class="control" id="advertTopic" name="advertTopic" placeholder="例如: device/advert" value="device/advert" required>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-index="2">
+            <h2>WiFi配置</h2>
+            <div class="group">
+                <label class="label" for="wifiName">WiFi名称</label>
+                <input class="control" id="wifiName" name="wifiName" placeholder="输入WiFi SSID" value="" required>
+            </div>
+            <div class="group">
+                <label class="label" for="wifiPwd">WiFi密码</label>
+                <input class="control" id="wifiPwd" name="wifiPwd" type="password" placeholder="输入WiFi密码" value="" required>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-index="3">
+            <h2>地址信息</h2>
+            <div class="group">
+                <label class="label" for="chip">片区</label>
+                <select class="control" id="chip" name="chip" required>
+                    <option value="">请选择片区</option>
+                    <option value="A" selected>A区</option>
+                    <option value="B">B区</option>
+                    <option value="C">C区</option>
+                </select>
+            </div>
+            <div class="group">
+                <label class="label" for="detailAddr">详细地址</label>
+                <input class="control" id="detailAddr" name="detailAddr" placeholder="输入详细安装地址" value="" required>
+            </div>
+        </section>
+
+        <div class="page-actions">
+            <button type="button" class="btn btn-prev" id="prevBtn">上一页</button>
+            <button type="button" class="btn btn-next" id="nextBtn">下一页</button>
         </div>
 
         <div class="actions">
@@ -148,17 +250,67 @@
 <script>
     (function () {
         const form = document.getElementById('deviceConfigForm');
+        const tabs = Array.from(document.querySelectorAll('.tab'));
+        const panels = Array.from(document.querySelectorAll('.tab-panel'));
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let activeIndex = 0;
+
+        function setActive(index) {
+            activeIndex = Math.max(0, Math.min(index, panels.length - 1));
+            tabs.forEach(function (tab, i) {
+                tab.classList.toggle('active', i === activeIndex);
+            });
+            panels.forEach(function (panel, i) {
+                panel.classList.toggle('active', i === activeIndex);
+            });
+            prevBtn.disabled = activeIndex === 0;
+            nextBtn.disabled = activeIndex === panels.length - 1;
+        }
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                setActive(Number(tab.getAttribute('data-index')));
+            });
+        });
+        prevBtn.addEventListener('click', function () {
+            setActive(activeIndex - 1);
+        });
+        nextBtn.addEventListener('click', function () {
+            setActive(activeIndex + 1);
+        });
+        form.addEventListener('reset', function () {
+            setTimeout(function () { setActive(0); }, 0);
+        });
+        setActive(0);
+
+
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
+            const invalid = form.querySelector(':invalid');
+            if (invalid) {
+                const panel = invalid.closest('.tab-panel');
+                if (panel) {
+                    setActive(Number(panel.getAttribute('data-index')));
+                }
+                form.reportValidity();
+                return;
+            }
             const formData = new FormData(form);
             const payload = new URLSearchParams(formData);
             const displayData = {};
             formData.forEach((v, k) => { displayData[k] = String(v); });
-            const res = await fetch('/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: payload.toString()
-            });
+            let res;
+            try {
+                res = await fetch('/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: payload.toString()
+                });
+            } catch (err) {
+                alert('提交失败，请稍后重试');
+                return;
+            }
             if (!res.ok) {
                 alert('提交失败，请稍后重试');
                 return;

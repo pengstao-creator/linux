@@ -1,7 +1,7 @@
 #ifndef TOOL_H
 #define TOOL_H
 #include <glib-2.0/glib.h>
-#define CONFIG_PATH "/home/ubuntu/Embedded/linux/AdvertisingPlayer/common/config/config.ini"
+#define CONFIG_PATH "/home/pst/linux/AdvertisingPlayer/common/config/config.ini"
 
 gchar * getConfigPath();
 

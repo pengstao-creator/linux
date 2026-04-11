@@ -3,6 +3,7 @@
 #include "data.h"
 #include "log.h"
 #include "tool.h"
+
 #define MACHINE_CODE_PATH "/etc/machine-id"
 
 
@@ -27,53 +28,35 @@ size_t on_response(char* buffer,size_t size,size_t nitems,void* userdata)
     return 0;
 }
 
-
-void sendConfigRequest(const char * inipath)
+void sendConfigRequest(ConfigInfo * info)
 {
-    //从配置文件中读取信息
-    GKeyFile * newfile = g_key_file_new();
-    GError * gerror = NULL;
-    if(newfile)
+    if(info == NULL || !info->_init)
     {
-        if (!g_key_file_load_from_file(newfile, inipath, G_KEY_FILE_NONE, &gerror))
-        {
-            handleError("文件读取失败", gerror);
-        }
-        else
-        {
-     
-            gchar * backendUrl = g_key_file_get_string(newfile, "serverAddress", "backendUrl", &gerror);
-            if (!backendUrl)
-            {
-                handleError("读取backendUrl失败", gerror);
-            }
-            gchar * chip = g_key_file_get_string(newfile, "Address", "chip", &gerror);
-            if (!chip)
-            {
-                handleError("读取chip失败", gerror);
-            }
-            gchar * detailAddr = g_key_file_get_string(newfile, "Address", "detailAddr", &gerror);
-            if (!detailAddr)
-            {
-                handleError("读取detailAddr失败", gerror);
-            }
-
-            //构建后端服务器访问网址
-            gchar * sn = get_sn();
-            const char * urlform = "http://%s?chip=%s&detailAddr=%s&sn=%s";
-            gchar url[SIZE256];
-            sprintf(url,urlform,backendUrl,chip,detailAddr,sn);
-            g_free(sn);
-            sendGetRequest(url,on_response);
-        }
-        g_key_file_free(newfile);
+        MLOG_E("info is NULL or data");
+        return;
     }
-    
+    //构建后端服务器访问网址
+    gchar * sn = get_sn();
+    const char * urlform = "http://%s?chip=%s&detailAddr=%s&sn=%s";
+    gchar url[SIZE256];
+    sprintf(url,urlform,info->_backendUrl,info->_chip,info->_detailAddr,sn);
+    g_free(sn);
+    sendGetRequest(url,on_response);
 }
 
 
-//
-void sendHearRequest(const char* inipath)
+
+void sendHearRequest(MQTTClient * client,ConfigInfo * info)
 {
-    
+    if(!client || !info || !info->_init)
+    {
+        MLOG_E("mqttclient or info is NULL or data");
+        return;
+    }
+    gchar payload[SIZE256];
+    const char * chip = info->_chip ? info->_chip : "";
+    const char * detailAddr = info->_detailAddr ? info->_detailAddr : "";
+    const char * topic = info->_heartbeatTopic ? info->_heartbeatTopic : "heartbeat";
+    g_snprintf(payload,sizeof(payload),"{\"chip\":\"%s\",\"detailAddr\":\"%s\"}",chip,detailAddr);
+    publishMessage(client,topic,payload,0,0);
 }

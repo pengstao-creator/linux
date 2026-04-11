@@ -11,7 +11,7 @@ gchar *getConfigPath()
     {
         if (!g_key_file_load_from_file(newfile, CONFIG_PATH, G_KEY_FILE_NONE, &gerror))
         {
-            handleError("文件读取失败", gerror);
+            handleError("加载配置文件路径", gerror);
         }
         else
         {

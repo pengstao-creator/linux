@@ -1,6 +1,6 @@
 #ifndef CONFIG_PRO
 #define CONFIG_PRO
-#include "../../3rd-lib/include/mongoose.h"
+#include "configinfo.h"
 
 #define HTML_ROOT "../html/index.html"
 #define RESPONSE "../html/form_response.html"

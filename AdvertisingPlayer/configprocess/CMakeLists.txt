@@ -26,6 +26,7 @@ link_directories(${GLIB_LIBRARY_DIRS})
 set(SOURCES
     src/main.c
     src/configprocess.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/configinfo.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/log.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/tool.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/msgQueue.c

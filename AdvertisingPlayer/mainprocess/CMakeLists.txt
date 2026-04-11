@@ -25,6 +25,8 @@ set(SOURCES
     src/main.c
     src/sendconfig.c
     src/requestMethod.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/mqttclient.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/configinfo.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/log.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/tool.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/src/msgQueue.c
@@ -32,6 +34,7 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-lib/src/elog_async.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-lib/src/elog_buf.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-lib/src/elog_utils.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-lib/src/mongoose.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-lib/port/elog_port.c
 )
 
@@ -42,5 +45,6 @@ add_executable(mainprocess ${SOURCES})
 target_link_libraries(mainprocess
     ${GLIB_LIBRARIES}
     ${CURL_LIBRARIES}
+    paho-mqtt3c
     pthread
 )
